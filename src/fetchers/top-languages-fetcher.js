@@ -52,6 +52,7 @@ async function fetchTopLanguages(username, exclude_repo = [], count_private = fa
   console.log("Prepare fetch top languages api.")
   const res = await retryer(fetcher, { login: username });
   console.log("Fetch top languages api result.", res)
+  console.log("Fetch top languages api user.", res.data.user)
 
   if (res.data.errors) {
     logger.error(res.data.errors);
