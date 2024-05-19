@@ -46,19 +46,18 @@ const fetcher = (variables, token) => {
  * @param {string[]} exclude_repo
  * @returns {Promise<import("./types").TopLangData>}
  */
-async function fetchTopLanguages(username, exclude_repo = [], count_private = false) {
+async function fetchTopLanguages(username, exclude_repo = [], count_private = true) {
   if (!username) throw new MissingParamError(["username"]);
 
   console.log("Prepare fetch top languages api.")
   const res = await retryer(fetcher, { login: username });
-  console.log("Fetch top languages api result.", res)
-  console.log("Fetch top languages api user.", res.data.user)
 
   if (res.data.errors) {
     logger.error(res.data.errors);
     throw Error(res.data.errors[0].message || "Could not fetch user");
   }
 
+  console.log("Fetch top languages api user.", res.data.data.user)
   let repoNodes = res.data.data.user.repositories.nodes;
   let repoToHide = {};
 
