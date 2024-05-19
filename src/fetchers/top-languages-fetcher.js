@@ -59,7 +59,9 @@ async function fetchTopLanguages(username, exclude_repo = [], count_private = tr
   }
 
   console.log("Fetch top languages api user.", res.data.data.user)
-  let repoNodes = res.data.data.user.repositories.nodes;
+  let user = res.data.data.user;
+  let repo = user.repositories ? user.repositories : user.repositoriesContributedTo;
+  let repoNodes = repo.nodes;
   let repoToHide = {};
 
   // populate repoToHide map for quick lookup
