@@ -45,13 +45,11 @@ export default async (req, res) => {
   }
 
   try {
-    console.log("Prepare request api top languages.")
     const topLangs = await fetchTopLanguages(
       username,
       parseArray(exclude_repo),
       parseBoolean(count_private),
     );
-    console.log("Top languages: ", topLangs)
 
     const cacheSeconds = clampValue(
       parseInt(cache_seconds || CONSTANTS.FOUR_HOURS, 10),

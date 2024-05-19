@@ -49,7 +49,9 @@ const fetcher = (variables, token) => {
 async function fetchTopLanguages(username, exclude_repo = [], count_private = false) {
   if (!username) throw new MissingParamError(["username"]);
 
+  console.log("Prepare fetch top languages api.")
   const res = await retryer(fetcher, { login: username });
+  console.log("Fetch top languages api result.", res)
 
   if (res.data.errors) {
     logger.error(res.data.errors);
